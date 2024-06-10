@@ -31,6 +31,7 @@ function addPizzaToOrder() {
 document.addEventListener('DOMContentLoaded', function() {
   const pizzaCards = document.querySelectorAll('.pizza-card');
   const sauceCards = document.querySelectorAll('.sauce-card');
+  const tailleCards = document.querySelectorAll('.taille-card');
   const ingredientCards = document.querySelectorAll('.ingredient-card');
   const supplementCards = document.querySelectorAll('.supplement-card');  
   const ingredientsContainer = document.getElementById('ingredients-container');
@@ -47,10 +48,10 @@ document.addEventListener('DOMContentLoaded', function() {
   // Function to add a new ingredient card
   function addIngredientCard(ingredientName, ingredientImg) {
     const card = document.createElement('div');
-    card.classList.add('col-md-3', 'col-sm-6', 'mb-4');
+    card.classList.add('col-md-3', 'col-sm-6', 'mb-4', 'ingredient-card');
 
     const innerDiv = document.createElement('div');
-    innerDiv.classList.add('card', 'ingredient-card');
+    innerDiv.classList.add('card');
     // innerDiv.setAttribute('data-ingredient', ingredientData);
 
     const img = document.createElement('img');
@@ -111,10 +112,10 @@ document.addEventListener('DOMContentLoaded', function() {
   sauceCards.forEach(card => {
     card.addEventListener('click', function () {
         // Remove 'selected' class from all ingredient cards
-        sauceCards.forEach(c => c.classList.remove('selected'));
+        sauceCards.forEach(c => c.classList.remove('selected-card'));
         
         // Add 'selected' class to the clicked card
-        this.classList.add('selected');
+        this.classList.add('selected-card');
 
         const sauceName = this.getAttribute('data-ingredient');
 
@@ -135,8 +136,38 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
+    tailleCards.forEach(card => {
+      card.addEventListener('click', function () {
+          // Remove 'selected' class from all ingredient cards
+          tailleCards.forEach(c => c.classList.remove('selected-card'));
+          
+          // Add 'selected' class to the clicked card
+          this.classList.add('selected-card');
+  
+          const tailleName = this.getAttribute('data');
+  
+          // Configuration de la requête
+          var requestOptions = {
+              method: 'POST',
+              headers: {
+                  'Content-Type': 'application/json'
+              },
+              body: JSON.stringify(tailleName)
+          };
+  
+          // Envoi de la requête au backend Flask
+          fetch('/update_taille', requestOptions)
+              .then(response => response.json())
+              .then(data => console.log(data))
+              .catch(error => console.log('Erreur :', error));
+          });
+      });
+
   ingredientCards.forEach(card => {
     card.addEventListener('click', function() {
+      const ingredient = card.firstElementChild.getAttribute('data-ingredient');
+      console.log(ingredient);
+      add_deplement(ingredient);
       card.remove()
     });
   });
@@ -179,6 +210,21 @@ document.addEventListener('DOMContentLoaded', function() {
       .then(response => response.json())
       .then(indice => console.log(indice))
       .catch(error => console.log('Erreur :', error));
-    console.log(indice + "removed");
   }
+function add_deplement(ingredient) {
+  // Configuration de la requête
+  var requestOptions = {
+    method: 'POST',
+    headers: {
+        'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(ingredient)
+  }; 
+
+  // Envoi de la requête au backend Flask
+  fetch('/add_deplement', requestOptions)
+    .then(response => response.json())
+    .then(ingredient => console.log(ingredient))
+    .catch(error => console.log('Erreur :', error));
+}
 });

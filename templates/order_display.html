@@ -38,16 +38,21 @@
       </td>
       <td>
         {% for pizza in order.pizzas %}
-        {% for supplement in pizza.supplements %}
-        <span>+ {{supplement}}</span>
-        {% endfor %}</td>
-        {% for deplement in pizza.deplements %}
-        <span>- {{dedeplement}}</span>
-        {% endfor %}</td>
-        {% endfor %}</td>
+        <p>+
+          {% for supplement in pizza.supplements %}
+          {{supplement}}
+          {% endfor %}
+          -
+          {% for deplement in pizza.deplements %}
+          {{deplement}}
+          {% endfor %}
+        </p>
+        
+        {% endfor %}
+      </td>
       <td></td>
       <td>{{ order.name }}</td>
-      <td></td>
+      <td>{{ order.price}}</td>
       <td><button>En attente</button></td>
     </tr>
     {% endfor %}

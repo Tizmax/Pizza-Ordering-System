@@ -13,6 +13,9 @@
             {% for supplement in pizza.supplements %}
             <ui> + {{ supplement }} </ui>
             {% endfor %}
+            {% for deplement in pizza.deplements %}
+            <ui> - {{ deplement }} </ui>
+            {% endfor %}
         </div>
         {% endfor %}
         <a href="/choose_pizza" class="btn btn-primary text-center">Ajouter une pizza</a>

@@ -3,106 +3,160 @@ from datetime import datetime
 
 app = Flask(__name__)
 
+tailles = ['P','M','G']
+
 sauces = {
     "Rouge": "rouge.jpg",
     "Blanche": "rouge.jpg",
     "Rose": "rouge.jpg",
 }
 
+supplement_classique = {
+        "P": 1,
+        "M": 1.5,
+        "G": 2
+    }
+supplement_fixe = {
+        "P": 1.5,
+        "M": 1.5,
+        "G": 1.5
+    }
+
+
 # Dictionary of ingredients
 ingredients = {
     "Gruyère": {
         "image": "cheese.jpg",
-        "description": "Gruyère rapé"
+        "description": "Gruyère rapé",
+        "prix": supplement_classique
     },
     "Mozzarella": {
         "image": "cheese.jpg",
-        "description": "Mozzarella rapée"
+        "description": "Mozzarella rapée",
+        "prix": supplement_classique
     },
     "Olives": {
         "image": "cheese.jpg",
-        "description": "Olives noires"
+        "description": "Olives noires",
+        "prix": supplement_fixe
+
     },
     "Anchois": {
         "image": "cheese.jpg",
-        "description": "Anchois"
+        "description": "Anchois",
+        "prix": supplement_classique
     },
     "Jambon": {
         "image": "cheese.jpg",
-        "description": "Cubes de jambon"
+        "description": "Cubes de jambon",
+        "prix": supplement_classique
     },
     "Champignons": {
         "image": "cheese.jpg",
-        "description": "Champignons hachés"
+        "description": "Champignons hachés",
+        "prix": supplement_classique
     },
     "Oignons": {
         "image": "cheese.jpg",
-        "description": "Oignons hachés"
+        "description": "Oignons hachés",
+        "prix": supplement_classique
     },
     "Chorizo": {
         "image": "cheese.jpg",
-        "description": "Tranches de chorizo"
+        "description": "Tranches de chorizo",
+        "prix": supplement_classique
     },
     "Thon": {
         "image": "cheese.jpg",
-        "description": "Miettes de thon"
+        "description": "Miettes de thon",
+        "prix": supplement_classique
     },
     "Câpres": {
         "image": "cheese.jpg",
-        "description": "Câpres"
+        "description": "Câpres",
+        "prix": supplement_classique
     },
     "Bolognaise": {
         "image": "cheese.jpg",
-        "description": "Sauce Bolognaise"
+        "description": "Sauce Bolognaise",
+        "prix": supplement_classique
     },
     "Lardons": {
         "image": "cheese.jpg",
-        "description": "Lardons fumés"
+        "description": "Lardons fumés",
+        "prix": supplement_classique
     },
     "Oeuf": {
         "image": "cheese.jpg",
-        "description": "Oeuf"
+        "description": "Oeuf",
+        "prix": supplement_fixe
     },
     "Figatellu": {
         "image": "cheese.jpg",
-        "description": "Figatellu corse"
+        "description": "Figatellu corse",
+        "prix": supplement_classique
     },
     "Fruits de mer": {
         "image": "cheese.jpg",
-        "description": "Salade de fruits de mer"
+        "description": "Salade de fruits de mer",
+        "prix": supplement_classique
     },
     "Kebab": {
         "image": "cheese.jpg",
-        "description": "Mix de volailles épicé"
+        "description": "Mix de volailles épicé",
+        "prix": supplement_classique
     },
     "Roquefort": {
         "image": "cheese.jpg",
-        "description": "Roquefort"
+        "description": "Roquefort",
+        "prix": supplement_classique
     },
     "Chèvre": {
         "image": "cheese.jpg",
-        "description": "Buche de chèvre"
+        "description": "Buche de chèvre",
+        "prix": supplement_classique
     },
     "Poivrons": {
         "image": "cheese.jpg",
-        "description": "Poivrons"
+        "description": "Poivrons",
+        "prix": supplement_classique
     },
     "Coeurs d'artichaut": {
         "image": "cheese.jpg",
-        "description": "Artichauts"
+        "description": "Artichauts",
+        "prix": supplement_classique
     },
     "Aubergine": {
         "image": "cheese.jpg",
-        "description": "Aubergines"
+        "description": "Aubergines",
+        "prix": supplement_classique
     },
     "Miel": {
         "image": "cheese.jpg",
-        "description": "Miel AOP de Corse"
+        "description": "Miel AOP de Corse",
+        "prix": supplement_classique
     },
     "Pignons": {
         "image": "cheese.jpg",
-        "description": "Pignons de pin"
+        "description": "Pignons de pin",
+        "prix": supplement_classique
     }
+}
+
+prix_pizza_1 = {
+    "P": 6.5,
+    "M": 8.5,
+    "G": 11.5
+}
+prix_pizza_2 = {
+    "P": 7,
+    "M": 9,
+    "G": 12
+}
+prix_pizza_3 = {
+    "P": 7.5,
+    "M": 10,
+    "G": 13
 }
 
 # Dictionary of pizzas
@@ -111,133 +165,155 @@ pizzas = {
         "image": "margherita.jpg",
         "description": "Classic cheese and tomato pizza",
         "sauce": "Rouge",
-        "ingredients": [ingredients["Gruyère"], ingredients["Olives"]]
+        "ingredients": ["Gruyère", "Olives"],
+        "prix": prix_pizza_1
     },
     "Anchois": {
         "image": "margherita.jpg",
         "description": "Classic cheese and tomato pizza",
         "sauce": "Rouge",
-        "ingredients": [ingredients["Anchois"], ingredients["Olives"]]
+        "ingredients": ["Anchois", "Olives"],
+        "prix": prix_pizza_1
     },
     "Napolitaine": {
         "image": "margherita.jpg",
         "description": "Classic cheese and tomato pizza",
         "sauce": "Rouge",
-        "ingredients": [ingredients["Gruyère"], ingredients["Anchois"], ingredients["Olives"]]
+        "ingredients": ["Anchois", "Gruyère", "Olives"],
+        "prix": prix_pizza_1
     },
     "Jambonnière": {
         "image": "margherita.jpg",
         "description": "Classic cheese and tomato pizza",
         "sauce": "Rouge",
-        "ingredients": [ingredients["Gruyère"], ingredients["Jambon"]]
+        "ingredients": ["Jambon", "Gruyère"],
+        "prix": prix_pizza_1
     },
     "Forestière": {
         "image": "margherita.jpg",
         "description": "Classic cheese and tomato pizza",
         "sauce": "Rouge",
-        "ingredients": [ingredients["Gruyère"], ingredients["Olives"]]
+        "ingredients": ["Champignons", "Gruyère"],
+        "prix": prix_pizza_1
     },
     "Reine": {
         "image": "margherita.jpg",
         "description": "Classic cheese and tomato pizza",
         "sauce": "Rouge",
-        "ingredients": [ingredients["Gruyère"], ingredients["Olives"]]
+        "ingredients": ["Jambon", "Champignons", "Gruyère"],
+        "prix": prix_pizza_1
     },
     "Oignons": {
         "image": "margherita.jpg",
         "description": "Classic cheese and tomato pizza",
         "sauce": "Rouge",
-        "ingredients": [ingredients["Gruyère"], ingredients["Olives"]]
+        "ingredients": ["Oignons", "Gruyère"],
+        "prix": prix_pizza_1
     },
     "Knacky": {
         "image": "margherita.jpg",
         "description": "Classic cheese and tomato pizza",
         "sauce": "Rouge",
-        "ingredients": [ingredients["Gruyère"], ingredients["Olives"]]
+        "ingredients": ["Knacky", "Gruyère"],
+        "prix": prix_pizza_1
     },
     "Chorizo": {
         "image": "margherita.jpg",
         "description": "Classic cheese and tomato pizza",
         "sauce": "Rouge",
-        "ingredients": [ingredients["Gruyère"], ingredients["Olives"]]
+        "ingredients": ["Chorizo", "Champignons", "Gruyère"],
+        "prix": prix_pizza_2
     },
     "Thon et Câpres": {
         "image": "margherita.jpg",
         "description": "Classic cheese and tomato pizza",
         "sauce": "Rouge",
-        "ingredients": [ingredients["Gruyère"], ingredients["Olives"]]
+        "ingredients": ["Thon", "Câpres", "Gruyère"],
+        "prix": prix_pizza_2
     },
     "Bolognaise": {
         "image": "margherita.jpg",
         "description": "Classic cheese and tomato pizza",
         "sauce": "Rouge",
-        "ingredients": [ingredients["Gruyère"], ingredients["Olives"]]
+        "ingredients": ["Bolognaise", "Gruyère"],
+        "prix": prix_pizza_2
     },
     "Carbonara": {
         "image": "margherita.jpg",
         "description": "Classic cheese and tomato pizza",
         "sauce": "Blanche",
-        "ingredients": [ingredients["Gruyère"], ingredients["Olives"]]
+        "ingredients": ["Lardons", "Oignons", "Gruyère"],
+        "prix": prix_pizza_2
     },
     "Chausson": {
         "image": "margherita.jpg",
         "description": "Classic cheese and tomato pizza",
         "sauce": "Rouge",
-        "ingredients": [ingredients["Gruyère"], ingredients["Olives"]]
+        "ingredients": ["Jambon", "Champignons", "Gruyère", "Oeuf"],
+        "prix": prix_pizza_2
     },
     "Figatellu": {
         "image": "margherita.jpg",
         "description": "Classic cheese and tomato pizza",
         "sauce": "Rouge",
-        "ingredients": [ingredients["Gruyère"], ingredients["Olives"]]
+        "ingredients": ["Figatellu", "Champignons", "Gruyère"],
+        "prix": prix_pizza_3
     },
     "Fruits de mer": {
         "image": "margherita.jpg",
         "description": "Classic cheese and tomato pizza",
         "sauce": "Rouge",
-        "ingredients": [ingredients["Gruyère"], ingredients["Olives"]]
+        "ingredients": ["Fruit de mers", "Gruyère"],
+        "prix": prix_pizza_3
     },
     "Kebab": {
         "image": "margherita.jpg",
         "description": "Classic cheese and tomato pizza",
         "sauce": "Blanche",
-        "ingredients": [ingredients["Gruyère"], ingredients["Olives"]]
+        "ingredients": ["Kebab", "Gruyère"],
+        "prix": prix_pizza_3
     },
     "Roquefort": {
         "image": "margherita.jpg",
         "description": "Classic cheese and tomato pizza",
         "sauce": "Blanche",
-        "ingredients": [ingredients["Gruyère"], ingredients["Olives"]]
+        "ingredients": ["Jambon", "Roquefort", "Gruyère"],
+        "prix": prix_pizza_3
     },
     "3 Fromages": {
         "image": "pepperoni.jpg",
         "description": "Pepperoni and cheese",
         "sauce": "Blanche",
-        "ingredients": [ingredients["Gruyère"], ingredients["Olives"]]
+        "ingredients": ["Roquefort", "Gruyère", "Chèvre"],
+        "prix": prix_pizza_3
     },
     "Poivrons et Lardons": {
         "image": "veggie.jpg",
         "description": "Mixed vegetables and cheese",
         "sauce": "Rouge",
-        "ingredients": [ingredients["Gruyère"], ingredients["Olives"]]
+        "ingredients": ["Poivrons", "Lardons", "Gruyère"],
+        "prix": prix_pizza_3
     },
     "4 Saisons": {
         "image": "veggie.jpg",
         "description": "Mixed vegetables and cheese",
         "sauce": "Rouge",
-        "ingredients": [ingredients["Gruyère"], ingredients["Olives"]]
+        "ingredients": ["Coeurs d'artichaud", "Poivrons", "Aubergine" "Gruyère"],
+        "prix": prix_pizza_3
     },
     "Pizza du chef": {
         "image": "veggie.jpg",
         "description": "Mixed vegetables and cheese",
         "sauce": "Rouge",
-        "ingredients": [ingredients["Gruyère"], ingredients["Olives"]]
+        "ingredients": ["Poivrons", "Aubergine", "Gruyère", "Chèvre"],
+        "prix": prix_pizza_3
     },
     "Pizza de Sophie": {
         "image": "hawaiian.jpg",
         "description": "Ham, pineapple, and cheese",
         "sauce": "Blanche",
-        "ingredients": [ingredients["Gruyère"], ingredients["Olives"]]
+        "ingredients": ["Gruyère", "Chèvre", "Miel", "Pignons"],
+        "prix": prix_pizza_3
     }
 }
 
@@ -251,6 +327,24 @@ pizza = {
     "supplements": [],
     "deplements": []
 }
+
+
+def pricing(order):
+    price = 0
+    for pizza in order:
+        price += pizzas[pizza["name"]]["prix"][pizza["size"]]
+        for supplement in pizza["supplements"]:
+            price += ingredients[supplement]["prix"][pizza["size"]]
+    return price
+
+@app.route('/update_taille', methods=['POST'])
+def update_taille():
+    global pizza
+    data = request.json
+
+    pizza["size"] = data
+    
+    return jsonify({'status': 'success'})
 
 @app.route('/update_sauce', methods=['POST'])
 def update_sauce():
@@ -271,6 +365,7 @@ def update_pizza():
     pizza["name"] = data
     pizza["supplements"] = []
     pizza["sauce"] = ""
+    pizza["size"] = "M"
     
     return jsonify({'status': 'success'})
 
@@ -287,6 +382,14 @@ def remove_supplement():
     global pizza
     data = int(request.json)
     pizza["supplements"].pop(data)
+    
+    return jsonify({'status': 'success'})
+
+@app.route('/add_deplement', methods=['POST'])
+def add_deplement():
+    global order
+    data = request.json
+    pizza["deplements"].append(data)
     
     return jsonify({'status': 'success'})
 
@@ -314,6 +417,7 @@ def order_display():
     sorted_planning = dict(sorted(planning.items()))
     return render_template('order_display.html', planning=sorted_planning)
 
+
 @app.route('/choose_pizza')
 def choose_pizza():
     return render_template('choose_pizza.html', pizzas=pizzas)
@@ -321,19 +425,21 @@ def choose_pizza():
 @app.route('/choose_supplements')
 def choose_supplements():
     pizza = request.args.get('pizza', '')
-    return render_template('choose_supplements.html', pizza=pizza, pizzas=pizzas, supplements=ingredients, sauces=sauces)
+    return render_template('choose_supplements.html', pizza=pizza, pizzas=pizzas, supplements=ingredients, sauces=sauces, tailles=tailles)
 
 @app.route('/recap', methods=['GET', 'POST'])
 def recap():
     if request.method == 'POST':
         name = request.form['name']
         time_str = request.form['time']
+        price = pricing(order)
+
         try:
             if time_str in planning:
-                planning[time_str].append({"name": name, "pizzas": order.copy()})
+                planning[time_str].append({"name": name, "pizzas": order.copy(), "price" : price})
                 
             else:
-                planning[time_str] = [{"name": name, "pizzas": order.copy()}]
+                planning[time_str] = [{"name": name, "pizzas": order.copy(),"price" : price}]
             
             return redirect(url_for('order_display'))
         except ValueError:
@@ -351,3 +457,5 @@ def tab():
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=5000, debug=True)
+
+
