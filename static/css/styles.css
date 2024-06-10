@@ -2,7 +2,7 @@ body {
     background-color: #f8f9fa;
   }
 
-.pizza-card, .ingredient-card {
+.pizza-card, .ingredient-card, .sauce-card {
   border: none;
   cursor: pointer;
   transition: transform 0.2s;
@@ -10,12 +10,16 @@ body {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.pizza-card img, .ingredient-card img {
+.pizza-card img, .ingredient-card img, .sauce-card img {
   border-radius: 15px 15px 0 0;
 }
 
-.pizza-card:hover, .ingredient-card:hover {
+.pizza-card:hover, .ingredient-card:hover, .sauce-card:hover{
   transform: scale(1.05);
+}
+
+.selected {
+  border: 2px solid #007bff;
 }
 
 .pizza-card .card-body {

@@ -4,18 +4,9 @@ from datetime import datetime
 app = Flask(__name__)
 
 sauces = {
-    "rouge": {
-        "image": "cheese.jpg",
-        "description": "Sauce tomate"
-    },
-    "blanche": {
-        "image": "cheese.jpg",
-        "description": "Crème Fraiche"
-    },
-    "rose": {
-        "image": "cheese.jpg",
-        "description": "Tomate et Crème"
-    }
+    "Rouge": "rouge.jpg",
+    "Blanche": "rouge.jpg",
+    "Rose": "rouge.jpg",
 }
 
 # Dictionary of ingredients
@@ -119,148 +110,159 @@ pizzas = {
     "Marguerite": {
         "image": "margherita.jpg",
         "description": "Classic cheese and tomato pizza",
-        "sauce": sauces["rouge"],
+        "sauce": "Rouge",
         "ingredients": [ingredients["Gruyère"], ingredients["Olives"]]
     },
     "Anchois": {
         "image": "margherita.jpg",
         "description": "Classic cheese and tomato pizza",
-        "sauce": sauces["rouge"],
+        "sauce": "Rouge",
         "ingredients": [ingredients["Anchois"], ingredients["Olives"]]
     },
     "Napolitaine": {
         "image": "margherita.jpg",
         "description": "Classic cheese and tomato pizza",
-        "sauce": sauces["rouge"],
+        "sauce": "Rouge",
         "ingredients": [ingredients["Gruyère"], ingredients["Anchois"], ingredients["Olives"]]
     },
     "Jambonnière": {
         "image": "margherita.jpg",
         "description": "Classic cheese and tomato pizza",
-        "sauce": sauces["rouge"],
+        "sauce": "Rouge",
         "ingredients": [ingredients["Gruyère"], ingredients["Jambon"]]
     },
     "Forestière": {
         "image": "margherita.jpg",
         "description": "Classic cheese and tomato pizza",
-        "sauce": sauces["rouge"],
+        "sauce": "Rouge",
         "ingredients": [ingredients["Gruyère"], ingredients["Olives"]]
     },
     "Reine": {
         "image": "margherita.jpg",
         "description": "Classic cheese and tomato pizza",
-        "sauce": sauces["rouge"],
+        "sauce": "Rouge",
         "ingredients": [ingredients["Gruyère"], ingredients["Olives"]]
     },
     "Oignons": {
         "image": "margherita.jpg",
         "description": "Classic cheese and tomato pizza",
-        "sauce": sauces["rouge"],
+        "sauce": "Rouge",
         "ingredients": [ingredients["Gruyère"], ingredients["Olives"]]
     },
     "Knacky": {
         "image": "margherita.jpg",
         "description": "Classic cheese and tomato pizza",
-        "sauce": sauces["rouge"],
+        "sauce": "Rouge",
         "ingredients": [ingredients["Gruyère"], ingredients["Olives"]]
     },
     "Chorizo": {
         "image": "margherita.jpg",
         "description": "Classic cheese and tomato pizza",
-        "sauce": sauces["rouge"],
+        "sauce": "Rouge",
         "ingredients": [ingredients["Gruyère"], ingredients["Olives"]]
     },
     "Thon et Câpres": {
         "image": "margherita.jpg",
         "description": "Classic cheese and tomato pizza",
-        "sauce": sauces["rouge"],
+        "sauce": "Rouge",
         "ingredients": [ingredients["Gruyère"], ingredients["Olives"]]
     },
     "Bolognaise": {
         "image": "margherita.jpg",
         "description": "Classic cheese and tomato pizza",
-        "sauce": sauces["rouge"],
+        "sauce": "Rouge",
         "ingredients": [ingredients["Gruyère"], ingredients["Olives"]]
     },
     "Carbonara": {
         "image": "margherita.jpg",
         "description": "Classic cheese and tomato pizza",
-        "sauce": sauces["rouge"],
+        "sauce": "Blanche",
         "ingredients": [ingredients["Gruyère"], ingredients["Olives"]]
     },
     "Chausson": {
         "image": "margherita.jpg",
         "description": "Classic cheese and tomato pizza",
-        "sauce": sauces["rouge"],
+        "sauce": "Rouge",
         "ingredients": [ingredients["Gruyère"], ingredients["Olives"]]
     },
     "Figatellu": {
         "image": "margherita.jpg",
         "description": "Classic cheese and tomato pizza",
-        "sauce": sauces["rouge"],
+        "sauce": "Rouge",
         "ingredients": [ingredients["Gruyère"], ingredients["Olives"]]
     },
     "Fruits de mer": {
         "image": "margherita.jpg",
         "description": "Classic cheese and tomato pizza",
-        "sauce": sauces["rouge"],
+        "sauce": "Rouge",
         "ingredients": [ingredients["Gruyère"], ingredients["Olives"]]
     },
     "Kebab": {
         "image": "margherita.jpg",
         "description": "Classic cheese and tomato pizza",
-        "sauce": sauces["rouge"],
+        "sauce": "Blanche",
         "ingredients": [ingredients["Gruyère"], ingredients["Olives"]]
     },
     "Roquefort": {
         "image": "margherita.jpg",
         "description": "Classic cheese and tomato pizza",
-        "sauce": sauces["rouge"],
+        "sauce": "Blanche",
         "ingredients": [ingredients["Gruyère"], ingredients["Olives"]]
     },
     "3 Fromages": {
         "image": "pepperoni.jpg",
         "description": "Pepperoni and cheese",
-        "sauce": sauces["rouge"],
+        "sauce": "Blanche",
         "ingredients": [ingredients["Gruyère"], ingredients["Olives"]]
     },
     "Poivrons et Lardons": {
         "image": "veggie.jpg",
         "description": "Mixed vegetables and cheese",
-        "sauce": sauces["rouge"],
+        "sauce": "Rouge",
         "ingredients": [ingredients["Gruyère"], ingredients["Olives"]]
     },
     "4 Saisons": {
         "image": "veggie.jpg",
         "description": "Mixed vegetables and cheese",
-        "sauce": sauces["rouge"],
+        "sauce": "Rouge",
         "ingredients": [ingredients["Gruyère"], ingredients["Olives"]]
     },
     "Pizza du chef": {
         "image": "veggie.jpg",
         "description": "Mixed vegetables and cheese",
-        "sauce": sauces["rouge"],
+        "sauce": "Rouge",
         "ingredients": [ingredients["Gruyère"], ingredients["Olives"]]
     },
     "Pizza de Sophie": {
         "image": "hawaiian.jpg",
         "description": "Ham, pineapple, and cheese",
-        "sauce": sauces["rouge"],
+        "sauce": "Blanche",
         "ingredients": [ingredients["Gruyère"], ingredients["Olives"]]
     }
 }
 
 
 planning = {}
-orders = []
 order = []
 pizza = {
     "name": "",
     "size": "M",
-    "sauce": "rouge",
+    "sauce": "",
     "supplements": [],
     "deplements": []
 }
+
+@app.route('/update_sauce', methods=['POST'])
+def update_sauce():
+    global pizza
+    data = request.json
+
+    if data == pizzas[pizza["name"]]["sauce"]:
+        pizza["sauce"] = ""
+    else:
+        pizza["sauce"] = data
+    
+    return jsonify({'status': 'success'})
 
 @app.route('/update_pizza', methods=['POST'])
 def update_pizza():
@@ -268,6 +270,7 @@ def update_pizza():
     data = request.json
     pizza["name"] = data
     pizza["supplements"] = []
+    pizza["sauce"] = ""
     
     return jsonify({'status': 'success'})
 
@@ -305,19 +308,6 @@ def add_pizza_to_order():
 def index():
     return redirect(url_for('choose_pizza'))
 
-@app.route('/order_entry', methods=['GET', 'POST'])
-def order_entry():
-    if request.method == 'POST':
-        name = request.form['name']
-        time_str = request.form['time']
-        try:
-            order_time = datetime.strptime(time_str, "%H:%M")
-            orders.append({"name": name, "time": order_time})
-            return redirect(url_for('order_display'))
-        except ValueError:
-            return "Invalid time format. Please use HH:MM format.", 400
-    pizza = request.args.get('pizza', '')
-    return render_template('order_entry.html', pizza=pizza)
 
 @app.route('/order_display')
 def order_display():
@@ -331,7 +321,7 @@ def choose_pizza():
 @app.route('/choose_supplements')
 def choose_supplements():
     pizza = request.args.get('pizza', '')
-    return render_template('choose_supplements.html', pizza=pizza, pizzas=pizzas, supplements=ingredients)
+    return render_template('choose_supplements.html', pizza=pizza, pizzas=pizzas, supplements=ingredients, sauces=sauces)
 
 @app.route('/recap', methods=['GET', 'POST'])
 def recap():
@@ -339,8 +329,6 @@ def recap():
         name = request.form['name']
         time_str = request.form['time']
         try:
-            # order_time = datetime.strptime(time_str, "%H:%M")
-            # orders.append({"name": name, "pizzas": order.copy(), "time": order_time})
             if time_str in planning:
                 planning[time_str].append({"name": name, "pizzas": order.copy()})
                 

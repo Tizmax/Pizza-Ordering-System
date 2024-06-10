@@ -30,6 +30,7 @@ function addPizzaToOrder() {
 
 document.addEventListener('DOMContentLoaded', function() {
   const pizzaCards = document.querySelectorAll('.pizza-card');
+  const sauceCards = document.querySelectorAll('.sauce-card');
   const ingredientCards = document.querySelectorAll('.ingredient-card');
   const supplementCards = document.querySelectorAll('.supplement-card');  
   const ingredientsContainer = document.getElementById('ingredients-container');
@@ -85,7 +86,6 @@ document.addEventListener('DOMContentLoaded', function() {
     ingredientsContainer.appendChild(card);
   }
 
-
   pizzaCards.forEach(card => {
     card.addEventListener('click', function() {
       const pizzaName = this.getAttribute('data-pizza');var selectedSupplements = [];
@@ -107,6 +107,33 @@ document.addEventListener('DOMContentLoaded', function() {
       window.location.href = `/choose_supplements?pizza=${encodeURIComponent(pizzaName)}`;
     });
   });
+
+  sauceCards.forEach(card => {
+    card.addEventListener('click', function () {
+        // Remove 'selected' class from all ingredient cards
+        sauceCards.forEach(c => c.classList.remove('selected'));
+        
+        // Add 'selected' class to the clicked card
+        this.classList.add('selected');
+
+        const sauceName = this.getAttribute('data-ingredient');
+
+        // Configuration de la requête
+        var requestOptions = {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(sauceName)
+        };
+
+        // Envoi de la requête au backend Flask
+        fetch('/update_sauce', requestOptions)
+            .then(response => response.json())
+            .then(data => console.log(data))
+            .catch(error => console.log('Erreur :', error));
+        });
+    });
 
   ingredientCards.forEach(card => {
     card.addEventListener('click', function() {

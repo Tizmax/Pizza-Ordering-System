@@ -10,16 +10,16 @@
       <img src="{{ url_for('static', filename='images/' ~ pizzas[pizza]['image']) }}" class="img-fluid" alt="{{ pizza }} Pizza">  
     </div>
         
-    <!-- Display Ingredients -->
+    <!-- Display Sauces -->
     <div class = "col-9">
-      <h2>Ingrédients</h2>
+      <h2>Sauce</h2>
       <div class="row">
-      {% for ingredient in pizzas[pizza].ingredients %}
+      {% for sauce, img in sauces.items() %}
       <div class="col-3">
-        <div class="card ingredient-card" data-ingredient="{{ ingredient.description }}">
-          <img src="{{ url_for('static', filename='images/' ~ ingredient.image) }}" class="card-img-top" alt="{{ ingredient.description }}">
+        <div class="card sauce-card {%if loop.first %} selected {%endif%}" data-ingredient="{{ sauce }}">
+          <img src="{{ url_for('static', filename='images/' ~ img) }}" class="card-img-top" alt="{{ sauce }}">
           <div class="card-body">
-            <h5 class="card-title text-center">{{ ingredient.description }}</h5>
+            <h5 class="card-title text-center">{{ sauce }}</h5>
           </div>
         </div>
       </div>
