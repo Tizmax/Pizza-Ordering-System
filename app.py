@@ -263,7 +263,7 @@ pizzas = {
         "image": "margherita.jpg",
         "description": "Classic cheese and tomato pizza",
         "sauce": "Rouge",
-        "ingredients": ["Fruit de mers", "Gruyère"],
+        "ingredients": ["Fruits de mer", "Gruyère"],
         "prix": prix_pizza_3
     },
     "Kebab": {
@@ -325,7 +325,8 @@ pizza = {
     "size": "M",
     "sauce": "",
     "supplements": [],
-    "deplements": []
+    "deplements": [],
+    "quantity" : 1
 }
 
 
@@ -364,6 +365,7 @@ def update_pizza():
     data = request.json
     pizza["name"] = data
     pizza["supplements"] = []
+    pizza["deplements"] = []
     pizza["sauce"] = ""
     pizza["size"] = "M"
     
