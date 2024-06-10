@@ -1,0 +1,66 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="container mt-4">
+  <h1 class="text-center mb-4">Choix des suppléments</h1>
+  
+  <!-- Display Selected Pizza -->
+  <div class="row mb-4">
+    <div class="col-3  text-center card">
+      <h2>{{ pizza }}</h2>
+      <img src="{{ url_for('static', filename='images/' ~ pizzas[pizza]['image']) }}" class="img-fluid" alt="{{ pizza }} Pizza">  
+    </div>
+        
+    <!-- Display Ingredients -->
+    <div class = "col-9">
+      <h2>Ingrédients</h2>
+      <div class="row">
+      {% for ingredient in pizzas[pizza].ingredients %}
+      <div class="col-3">
+        <div class="card ingredient-card" data-ingredient="{{ ingredient.description }}">
+          <img src="{{ url_for('static', filename='images/' ~ ingredient.image) }}" class="card-img-top" alt="{{ ingredient.description }}">
+          <div class="card-body">
+            <h5 class="card-title text-center">{{ ingredient.description }}</h5>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+   </div> 
+  </div>  
+
+  <div class="row" id="ingredients-container">
+    {% for ingredient in pizzas[pizza].ingredients %}
+      <div class="col-3">
+        <div class="card ingredient-card" data-ingredient="{{ ingredient.description }}">
+          <img src="{{ url_for('static', filename='images/' ~ ingredient.image) }}" class="card-img-top" alt="{{ ingredient.description }}">
+          <div class="card-body">
+            <h5 class="card-title text-center">{{ ingredient.description }}</h5>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+  </div>
+
+  <!-- Recap Commande -->
+  <div class="text-center mt-4">
+    <a class='btn btn-primary' href="/recap" onclick="addPizzaToOrder()">Ajouter cette pizza</a>
+  </div>
+
+
+  <!-- Display Supplements Grid -->
+  <h1>Supplements</h1>
+  <div class="row">
+    {% for supplement, details in supplements.items() %}
+    <div class="col-md-3 col-sm-6 mb-4">
+      <div class="card supplement-card" name-supplement="{{supplement}}" img-supplement="{{details.image}}">
+        <img src="{{ url_for('static', filename='images/' ~ details.image) }}" class="card-img-top" alt="{{ supplement }}">
+        <div class="card-body">
+          <h5 class="card-title text-center">{{ supplement }}</h5>
+          <p class="card-text text-center">{{ details.description }}</p>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}

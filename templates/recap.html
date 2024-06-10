@@ -1,0 +1,31 @@
+{% extends "layout.html" %}
+{% block content %}
+    <div class="container mt-4">
+        <h1 class="text-center mb-4">Recapitulatif de la commande</h1>
+
+        {% for pizza in order %}
+        <div class="row">
+            <!-- Display selected pizza -->
+            <div class="col-md-3 offset-3">
+                <h4> {{ pizza.name }} </h4>
+            </div>
+            <div></div>
+            {% for supplement in pizza.supplements %}
+            <ui> + {{ supplement }} </ui>
+            {% endfor %}
+        </div>
+        {% endfor %}
+        <a href="/choose_pizza" class="btn btn-primary text-center">Ajouter une pizza</a>
+    </div>
+    <form method="POST" class="mt-4">
+        <div class="form-group">
+          <label for="name">Customer Name:</label>
+          <input type="text" id="name" name="name" class="form-control" required>
+        </div>
+        <div class="form-group">
+          <label for="time">Order Time:</label>
+          <input type="text" id="time" name="time" class="form-control" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Fin de la commande</button>
+      </form>
+{% endblock %}

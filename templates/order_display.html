@@ -1,0 +1,58 @@
+{% extends "layout.html" %}
+{% block header %}
+<meta http-equiv="refresh" content="10">
+{% endblock %}
+
+{% block content %}
+<h1>Planning</h1>
+<table class="table table-striped mt-4">
+  <thead>
+    <tr>
+      <th>Taille</th>
+      <th>Pizza</th>
+      <th>Suppléments</th>
+      <th>Détails</th>
+      <th>Nom</th>
+      <th>Prix</th>
+      <th>État</th>
+    </tr>
+  </thead>
+  {% for time, orders in planning.items() %}
+  <thead>
+    <tr>
+      <th colspan="7">{{time}}</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for order in orders %}
+    <tr>
+      <td>
+        {% for pizza in order.pizzas %}
+        <p>{{ pizza.size }}</p>
+        {% endfor %}
+      </td>
+      <td>
+        {% for pizza in order.pizzas %}
+        <p>{{ pizza.name }} {{ pizza.sauce }}</p>
+        {% endfor %}
+      </td>
+      <td>
+        {% for pizza in order.pizzas %}
+        {% for supplement in pizza.supplements %}
+        <span>+ {{supplement}}</span>
+        {% endfor %}</td>
+        {% for deplement in pizza.deplements %}
+        <span>- {{dedeplement}}</span>
+        {% endfor %}</td>
+        {% endfor %}</td>
+      <td></td>
+      <td>{{ order.name }}</td>
+      <td></td>
+      <td><button>En attente</button></td>
+    </tr>
+    {% endfor %}
+  </tbody>
+  {% endfor %}
+</table>
+<a href="/choose_pizza" onclick="resetOrder()" class="btn btn-primary">Add New Order</a>
+{% endblock %}

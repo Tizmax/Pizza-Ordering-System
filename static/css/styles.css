@@ -1,0 +1,27 @@
+body {
+    background-color: #f8f9fa;
+  }
+
+.pizza-card, .ingredient-card {
+  border: none;
+  cursor: pointer;
+  transition: transform 0.2s;
+  border-radius: 15px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.pizza-card img, .ingredient-card img {
+  border-radius: 15px 15px 0 0;
+}
+
+.pizza-card:hover, .ingredient-card:hover {
+  transform: scale(1.05);
+}
+
+.pizza-card .card-body {
+  padding: 10px;
+}
+
+.pizza-card .card-title {
+  margin-bottom: 0;
+}

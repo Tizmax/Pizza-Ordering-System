@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>État de la Commande</title>
+<style>
+  table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  th, td {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+  }
+  tr:hover {
+    background-color: #f2f2f2;
+  }
+  .pending { background-color: #ffcccb; }
+  .in-progress { background-color: #ffd700; }
+  .ready { background-color: #90ee90; }
+  .served { background-color: #87ceeb; }
+</style>
+</head>
+<body>
+
+<table id="orderTable">
+  <thead>
+    <tr>
+      <th>Commande</th>
+      <th>État</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr class="pending">
+      <td>Pizza Margherita</td>
+      <td><button onclick="changeState(this)">En attente</button></td>
+    </tr>
+    <tr class="pending">
+      <td>Pizza Pepperoni</td>
+      <td><button onclick="changeState(this)">En attente</button></td>
+    </tr>
+    <!-- Ajoutez plus de lignes selon vos besoins -->
+  </tbody>
+</table>
+
+<script>
+function changeState(button) {
+  var row = button.parentNode.parentNode;
+  var currentState = row.classList[0];
+  var newState = '';
+  
+  // Met à jour l'état en fonction de l'état actuel
+  switch(currentState) {
+    case 'pending':
+      newState = 'in-progress';
+      break;
+    case 'in-progress':
+      newState = 'ready';
+      break;
+    case 'ready':
+      newState = 'served';
+      break;
+    case 'served':
+      newState = 'pending';
+      break;
+  }
+  
+  // Met à jour la classe de la ligne pour changer la couleur
+  row.classList.remove(currentState);
+  row.classList.add(newState);
+  
+  // Met à jour le texte du bouton
+  button.textContent = newState.replace('-', ' ');
+}
+</script>
+
+</body>
