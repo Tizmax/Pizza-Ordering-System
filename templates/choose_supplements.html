@@ -16,7 +16,7 @@
       <div class="row">
       {% for sauce, img in sauces.items() %}
       <div class="col-3">
-        <div class="card sauce-card {%if loop.first %} selected {%endif%}" data-ingredient="{{ sauce }}">
+        <div class="card sauce-card {%if sauce== pizzas[pizza].sauce %} selected {%endif%}" data-ingredient="{{ sauce }}">
           <img src="{{ url_for('static', filename='images/' ~ img) }}" class="card-img-top" alt="{{ sauce }}">
           <div class="card-body">
             <h5 class="card-title text-center">{{ sauce }}</h5>
