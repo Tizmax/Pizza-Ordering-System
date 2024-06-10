@@ -28,6 +28,26 @@ function addPizzaToOrder() {
     .catch(error => console.log('Erreur :', error));
 }
 
+function removeOrder(time,index) {
+    // Configuration de la requête
+    var requestOptions = {
+      method: 'POST',
+      headers: {
+          'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ time: time, index: index })
+    }; 
+  
+    // Envoi de la requête au backend Flask
+    fetch('/remove_order', requestOptions)
+      .then(response => response.json())
+      .then(time => console.log(time))
+      .then(index => console.log(index))
+      .catch(error => console.log('Erreur :', error));
+
+    location.reload()
+}
+
 document.addEventListener('DOMContentLoaded', function() {
   const pizzaCards = document.querySelectorAll('.pizza-card');
   const sauceCards = document.querySelectorAll('.sauce-card');

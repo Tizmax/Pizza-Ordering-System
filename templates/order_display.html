@@ -15,6 +15,7 @@
       <th>Nom</th>
       <th>Prix</th>
       <th>État</th>
+      <th></th>
     </tr>
   </thead>
   {% for time, orders in planning.items() %}
@@ -54,6 +55,7 @@
       <td>{{ order.name }}</td>
       <td>{{ order.price}}</td>
       <td><button>En attente</button></td>
+      <td><button onclick="removeOrder('{{time}}', '{{loop.index0}}')">Supprimer</button></td>
     </tr>
     {% endfor %}
   </tbody>

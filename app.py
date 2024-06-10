@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for, jsonify
+from flask import Flask, render_template, request, redirect, url_for, jsonify, json
 from datetime import datetime
 
 app = Flask(__name__)
@@ -338,6 +338,10 @@ def pricing(order):
             price += ingredients[supplement]["prix"][pizza["size"]]
     return price
 
+def save():
+    json.dump(planning, open("planning.txt",'w'))
+    
+
 @app.route('/update_taille', methods=['POST'])
 def update_taille():
     global pizza
@@ -387,6 +391,21 @@ def remove_supplement():
     
     return jsonify({'status': 'success'})
 
+@app.route('/remove_order', methods=['POST'])
+def remove_order():
+    order = request.json
+    time = order["time"]
+    index = int(order["index"])
+    if len(planning[time]) > 1:
+        planning[time].pop(index)
+    else:
+        planning.pop(time)
+
+    
+    save()
+
+    return jsonify({'status': 'success'})
+
 @app.route('/add_deplement', methods=['POST'])
 def add_deplement():
     global order
@@ -394,6 +413,7 @@ def add_deplement():
     pizza["deplements"].append(data)
     
     return jsonify({'status': 'success'})
+
 
 @app.route('/reset_order', methods=['POST'])
 def reset_order():
@@ -443,6 +463,8 @@ def recap():
             else:
                 planning[time_str] = [{"name": name, "pizzas": order.copy(),"price" : price}]
             
+            
+            save()
             return redirect(url_for('order_display'))
         except ValueError:
             return "Invalid time format. Please use HH:MM format.", 400
@@ -453,11 +475,8 @@ def recap():
 def recap_order():
     return render_template('recap_orderv3.html')
 
-@app.route('/tab')
-def tab():
-    return render_template('tab.html')
 
 if __name__ == "__main__":
+    planning = json.load(open("planning.txt"))
     app.run(host='0.0.0.0', port=5000, debug=True)
-
 
