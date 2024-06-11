@@ -342,6 +342,26 @@ def save():
     json.dump(planning, open("planning.txt",'w'))
     
 
+@app.route('/dec_quantity', methods=['POST'])
+def dec_quantity():
+    index = int(request.json)
+
+    if order[index]["quantity"] == 1:
+        order.pop(index)
+
+    order[index]["quantity"] -= 1
+
+
+    return jsonify({'status': 'success'}) 
+
+@app.route('/inc_quantity', methods=['POST'])
+def inc_quantity():
+    index = int(request.json)
+
+    order[index]["quantity"] += 1
+    
+    return jsonify({'status': 'success'})    
+
 @app.route('/update_taille', methods=['POST'])
 def update_taille():
     global pizza
@@ -468,7 +488,7 @@ def recap():
             return redirect(url_for('order_display'))
         except ValueError:
             return "Invalid time format. Please use HH:MM format.", 400
-    return render_template('recap.html', order=order)
+    return render_template('recap.html', order=order, pizzas = pizzas)
 
 
 @app.route('/recap_order')

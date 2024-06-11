@@ -54,8 +54,14 @@
       <td></td>
       <td>{{ order.name }}</td>
       <td>{{ order.price}}</td>
-      <td><button>En attente</button></td>
-      <td><button onclick="removeOrder('{{time}}', '{{loop.index0}}')">Supprimer</button></td>
+      <td>
+        <button>En attente</button>
+      </td>
+      <td>
+        <div class="delete">
+          <img  onclick="removeOrder('{{time}}', '{{loop.index0}}')" src="/static/images/delete.jpg" >
+        </div>
+      </td>
     </tr>
     {% endfor %}
   </tbody>

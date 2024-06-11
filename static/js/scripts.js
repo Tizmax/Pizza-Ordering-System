@@ -29,23 +29,73 @@ function addPizzaToOrder() {
 }
 
 function removeOrder(time,index) {
+  // Configuration de la requête
+  var requestOptions = {
+    method: 'POST',
+    headers: {
+        'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ time: time, index: index })
+  }; 
+
+  // Envoi de la requête au backend Flask
+  fetch('/remove_order', requestOptions)
+    .then(response => response.json())
+    .then(time => console.log(time))
+    .then(index => console.log(index))
+    .catch(error => console.log('Erreur :', error));
+
+  location.reload()
+}
+function incQuantity(index, quantity) {
     // Configuration de la requête
     var requestOptions = {
       method: 'POST',
       headers: {
           'Content-Type': 'application/json'
       },
-      body: JSON.stringify({ time: time, index: index })
+      body: JSON.stringify(index)
     }; 
-  
+
     // Envoi de la requête au backend Flask
-    fetch('/remove_order', requestOptions)
+    fetch('/inc_quantity', requestOptions)
       .then(response => response.json())
-      .then(time => console.log(time))
       .then(index => console.log(index))
       .catch(error => console.log('Erreur :', error));
 
     location.reload()
+}
+
+function decQuantity(index) {
+    var requestOptions = {
+      method: 'POST',
+      headers: {
+          'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(index)
+    }; 
+    
+    fetch('/dec_quantity', requestOptions)
+      .then(response => response.json())
+      .then(index => console.log(index))
+      .catch(error => console.log('Erreur :', error));
+
+    location.reload()
+}
+
+function tryDecQuantity(index, quantity) {
+  
+
+
+  if (quantity - 1 === 0) {
+    const confirmDelete = window.confirm("Supprimer la pizza ?");
+    if (confirmDelete) {
+        decQuantity(index);
+    }
+  } else {
+    decQuantity(index);
+  }
+
 }
 
 document.addEventListener('DOMContentLoaded', function() {
@@ -62,7 +112,7 @@ document.addEventListener('DOMContentLoaded', function() {
       dateFormat: "H:i",
       time_24hr: true,
       minuteIncrement: 15,
-      defaultDate: "12:00"
+      defaultDate: "19:00"
   });
 
   // Function to add a new ingredient card
