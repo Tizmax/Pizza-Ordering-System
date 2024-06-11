@@ -7,7 +7,7 @@ tailles = ['P','M','G']
 
 sauces = {
     "Rouge": "rouge.jpg",
-    "Blanche": "rouge.jpg",
+    "Blanche": "blanche.jpg",
     "Rose": "rouge.jpg",
 }
 
@@ -36,43 +36,43 @@ ingredients = {
         "prix": supplement_classique
     },
     "Olives": {
-        "image": "cheese.jpg",
+        "image": "olives.jpg",
         "description": "Olives noires",
         "prix": supplement_fixe
 
     },
     "Anchois": {
-        "image": "cheese.jpg",
+        "image": "anchois.jpg",
         "description": "Anchois",
         "prix": supplement_classique
     },
     "Jambon": {
-        "image": "cheese.jpg",
+        "image": "jambon.jpg",
         "description": "Cubes de jambon",
         "prix": supplement_classique
     },
     "Champignons": {
-        "image": "cheese.jpg",
+        "image": "champignons.jpg",
         "description": "Champignons hachés",
         "prix": supplement_classique
     },
     "Oignons": {
-        "image": "cheese.jpg",
+        "image": "oignons.jpg",
         "description": "Oignons hachés",
         "prix": supplement_classique
     },
     "Chorizo": {
-        "image": "cheese.jpg",
+        "image": "chorizo.jpg",
         "description": "Tranches de chorizo",
         "prix": supplement_classique
     },
     "Thon": {
-        "image": "cheese.jpg",
+        "image": "thon.jpg",
         "description": "Miettes de thon",
         "prix": supplement_classique
     },
     "Câpres": {
-        "image": "cheese.jpg",
+        "image": "câpres.jpg",
         "description": "Câpres",
         "prix": supplement_classique
     },
@@ -82,62 +82,62 @@ ingredients = {
         "prix": supplement_classique
     },
     "Lardons": {
-        "image": "cheese.jpg",
+        "image": "lardons.jpg",
         "description": "Lardons fumés",
         "prix": supplement_classique
     },
     "Oeuf": {
-        "image": "cheese.jpg",
+        "image": "oeuf.jpg",
         "description": "Oeuf",
         "prix": supplement_fixe
     },
     "Figatellu": {
-        "image": "cheese.jpg",
+        "image": "figatellu.jpg",
         "description": "Figatellu corse",
         "prix": supplement_classique
     },
     "Fruits de mer": {
-        "image": "cheese.jpg",
+        "image": "fruits de mer.jpg",
         "description": "Salade de fruits de mer",
         "prix": supplement_classique
     },
     "Kebab": {
-        "image": "cheese.jpg",
+        "image": "kebab.jpg",
         "description": "Mix de volailles épicé",
         "prix": supplement_classique
     },
     "Roquefort": {
-        "image": "cheese.jpg",
+        "image": "roquefort.jpg",
         "description": "Roquefort",
         "prix": supplement_classique
     },
     "Chèvre": {
-        "image": "cheese.jpg",
+        "image": "chèvre.jpg",
         "description": "Buche de chèvre",
         "prix": supplement_classique
     },
     "Poivrons": {
-        "image": "cheese.jpg",
+        "image": "poivrons.jpg",
         "description": "Poivrons",
         "prix": supplement_classique
     },
     "Coeurs d'artichaut": {
-        "image": "cheese.jpg",
+        "image": "artichaut.jpg",
         "description": "Artichauts",
         "prix": supplement_classique
     },
     "Aubergine": {
-        "image": "cheese.jpg",
+        "image": "aubergine.jpg",
         "description": "Aubergines",
         "prix": supplement_classique
     },
     "Miel": {
-        "image": "cheese.jpg",
+        "image": "miel.jpg",
         "description": "Miel AOP de Corse",
         "prix": supplement_classique
     },
     "Pignons": {
-        "image": "cheese.jpg",
+        "image": "pignons.jpg",
         "description": "Pignons de pin",
         "prix": supplement_classique
     }

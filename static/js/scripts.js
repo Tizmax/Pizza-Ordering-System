@@ -55,7 +55,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // innerDiv.setAttribute('data-ingredient', ingredientData);
 
     const img = document.createElement('img');
-    img.src =  `/static/images/${ingredientImg}`;
+    img.src =  `/static/images/ingredients/${ingredientImg}`;
     img.classList.add('card-img-top');
     // img.alt = ingredientData.description;
 

@@ -46,7 +46,7 @@
     {% for ingredient in pizzas[pizza].ingredients %}
     <div class="col-md-3 col-sm-6 mb-4 ingredient-card">
       <div class="card" data-ingredient="{{ ingredient }}">
-        <img src="{{ url_for('static', filename='images/' ~ supplements[ingredient].image) }}" class="card-img-top" alt="{{ ingredient }}">
+        <img src="{{ url_for('static', filename='images/ingredients/' ~ supplements[ingredient].image) }}" class="card-img-top" alt="{{ ingredient }}">
         <div class="card-body">
           <h5 class="card-title text-center">{{ ingredient}}</h5>
         </div>
@@ -67,10 +67,9 @@
     {% for supplement, details in supplements.items() %}
     <div class="col-md-3 col-sm-6 mb-4">
       <div class="card supplement-card" name-supplement="{{supplement}}" img-supplement="{{details.image}}">
-        <img src="{{ url_for('static', filename='images/' ~ details.image) }}" class="card-img-top" alt="{{ supplement }}">
+        <img src="{{ url_for('static', filename='images/ingredients/' ~ details.image) }}" class="card-img-top" alt="{{ supplement }}">
         <div class="card-body">
           <h5 class="card-title text-center">{{ supplement }}</h5>
-          <p class="card-text text-center">{{ details.description }}</p>
         </div>
       </div>
     </div>
