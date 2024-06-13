@@ -61,6 +61,11 @@ ingredients = {
         "description": "Oignons hachés",
         "prix": supplement_classique
     },
+    "Knacky": {
+        "image": "chorizo.jpg",
+        "description": "Saucisses knacky",
+        "prix": supplement_classique
+    },
     "Chorizo": {
         "image": "chorizo.jpg",
         "description": "Tranches de chorizo",
@@ -298,7 +303,7 @@ pizzas = {
         "image": "veggie.jpg",
         "description": "Mixed vegetables and cheese",
         "sauce": "Rouge",
-        "ingredients": ["Coeurs d'artichaud", "Poivrons", "Aubergine" "Gruyère"],
+        "ingredients": ["Coeurs d'artichaut", "Poivrons", "Aubergine", "Gruyère"],
         "prix": prix_pizza_3
     },
     "Pizza du chef": {
@@ -322,12 +327,36 @@ planning = {}
 order = []
 pizza = {
     "name": "",
+    "half": "",
     "size": "M",
     "sauce": "",
     "supplements": [],
     "deplements": [],
-    "quantity" : 1
+    "quantity" : 1,
+    "price": 0
 }
+
+
+def totalSoiree():
+    totals = {
+        "P": 0,
+        "M": 0,
+        "G": 0
+    }
+    counts = {
+        "P": 0,
+        "M": 0,
+        "G": 0
+    }
+    total = 0
+    for time, orders in planning.items():
+        for order in orders:
+            total += order["price"]
+            for pizza in order["pizzas"]:
+                totals[pizza["size"]] += 0
+                counts[pizza["size"]] += 1
+    return counts, total
+
 
 
 def pricing(order):
@@ -341,6 +370,22 @@ def pricing(order):
 def save():
     json.dump(planning, open("planning.txt",'w'))
     
+
+@app.route('/modif_order', methods=['POST'])
+def modif_order():
+    request = request.json
+    time = request["time"]
+    index = int(request["index"])
+    global order
+    order = planning[time][index][pizzas]
+    # if len(planning[time]) > 1:
+    #     planning[time].pop(index)
+    # else:
+    #     planning.pop(time)
+    
+    save()
+
+    return jsonify({'status': 'success'}) 
 
 @app.route('/dec_quantity', methods=['POST'])
 def dec_quantity():
@@ -494,6 +539,10 @@ def recap():
 @app.route('/recap_order')
 def recap_order():
     return render_template('recap_orderv3.html')
+
+@app.route('/totals')
+def totals():
+    return render_template('totals.html', totals=totalSoiree())
 
 
 if __name__ == "__main__":

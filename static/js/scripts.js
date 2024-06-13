@@ -1,3 +1,24 @@
+function modifOrder(time,index) {
+  // Configuration de la requête
+  var requestOptions = {
+    method: 'POST',
+    headers: {
+        'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ time: time, index: index })
+  }; 
+
+  const confirmModif = window.confirm("Modifier la pizza ?");
+  if (confirmModif) {
+    // Envoi de la requête au backend Flask
+    fetch('/modif_order', requestOptions)
+      .then(response => response.json())
+      .then(time => console.log(time))
+      .then(index => console.log(index))
+      .catch(error => console.log('Erreur :', error));
+  
+  }
+}
 function resetOrder() {
   // Configuration de la requête
   var requestOptions = {
@@ -38,14 +59,17 @@ function removeOrder(time,index) {
     body: JSON.stringify({ time: time, index: index })
   }; 
 
-  // Envoi de la requête au backend Flask
-  fetch('/remove_order', requestOptions)
-    .then(response => response.json())
-    .then(time => console.log(time))
-    .then(index => console.log(index))
-    .catch(error => console.log('Erreur :', error));
-
-  location.reload()
+  const confirmDelete = window.confirm("Supprimer la pizza ?");
+  if (confirmDelete) {
+    // Envoi de la requête au backend Flask
+    fetch('/remove_order', requestOptions)
+      .then(response => response.json())
+      .then(time => console.log(time))
+      .then(index => console.log(index))
+      .catch(error => console.log('Erreur :', error));
+  
+    location.reload()
+  }
 }
 function incQuantity(index, quantity) {
     // Configuration de la requête

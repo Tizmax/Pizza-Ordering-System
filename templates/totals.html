@@ -1,0 +1,40 @@
+{% extends "layout.html" %}
+{% block header %}
+{% endblock %}
+
+{% block content %}
+<h1>Totaux</h1>
+<table class="table table-striped mt-4">
+  <thead>
+    <tr>
+      <th>Taille</th>
+      <th>N°</th>
+      <th>Prix</th>
+      <th>Prix Moyen</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr> 
+      <td> P </td>
+      <td> {{totals[0]['P']}} </td>
+
+    </tr>
+    <tr> 
+      <td> M </td>
+      <td> {{totals[0]['M']}} </td>
+
+    </tr>
+    <tr> 
+      <td> G </td>
+      <td> {{totals[0]['G']}} </td>
+
+    </tr>
+    <tr>
+      <td> Total </td>
+      <td></td>
+      <td> {{totals[1]}} </td>
+    </tr>
+  </tbody>
+</table>
+{% endblock %}
