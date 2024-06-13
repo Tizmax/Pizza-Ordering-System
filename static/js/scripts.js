@@ -17,6 +17,7 @@ function modifOrder(time,index) {
       .then(index => console.log(index))
       .catch(error => console.log('Erreur :', error));
   
+    console.log("modif")
   }
 }
 function resetOrder() {
@@ -136,7 +137,6 @@ document.addEventListener('DOMContentLoaded', function() {
       dateFormat: "H:i",
       time_24hr: true,
       minuteIncrement: 15,
-      defaultDate: "19:00"
   });
 
   // Function to add a new ingredient card
@@ -183,7 +183,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
   pizzaCards.forEach(card => {
     card.addEventListener('click', function() {
-      const pizzaName = this.getAttribute('data-pizza');var selectedSupplements = [];
+      const pizzaName = this.getAttribute('data-pizza');
       
       // Configuration de la requête
       var requestOptions = {

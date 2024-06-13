@@ -335,7 +335,9 @@ pizza = {
     "quantity" : 1,
     "price": 0
 }
-
+clientName = ""
+hour = ""
+details = ""
 
 def totalSoiree():
     totals = {
@@ -373,15 +375,20 @@ def save():
 
 @app.route('/modif_order', methods=['POST'])
 def modif_order():
-    request = request.json
-    time = request["time"]
-    index = int(request["index"])
+    req = request.json
+
+    time = req["time"]
+    index = int(req["index"])
     global order
-    order = planning[time][index][pizzas]
-    # if len(planning[time]) > 1:
-    #     planning[time].pop(index)
-    # else:
-    #     planning.pop(time)
+    order = planning[time][index]["pizzas"]
+    global clientName
+    clientName = planning[time][index]["name"]
+    global hour
+    hour = time
+    if len(planning[time]) > 1:
+        planning[time].pop(index)
+    else:
+        planning.pop(time)
     
     save()
 
@@ -483,7 +490,13 @@ def add_deplement():
 @app.route('/reset_order', methods=['POST'])
 def reset_order():
     global order
+    global clientName
+    global details
+    global hour
     order = []
+    clientName = ""
+    details = ""
+    hour = ""
     
     return jsonify({'status': 'success'})
 
@@ -496,7 +509,7 @@ def add_pizza_to_order():
 
 @app.route('/')
 def index():
-    return redirect(url_for('choose_pizza'))
+    return redirect(url_for('planning'))
 
 
 @app.route('/order_display')
@@ -533,12 +546,8 @@ def recap():
             return redirect(url_for('order_display'))
         except ValueError:
             return "Invalid time format. Please use HH:MM format.", 400
-    return render_template('recap.html', order=order, pizzas = pizzas)
+    return render_template('recap.html', order=order, pizzas = pizzas, name=clientName, hour=hour)
 
-
-@app.route('/recap_order')
-def recap_order():
-    return render_template('recap_orderv3.html')
 
 @app.route('/totals')
 def totals():

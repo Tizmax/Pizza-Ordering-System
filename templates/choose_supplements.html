@@ -28,16 +28,26 @@
       </div>
     </div>
 
-    <!-- Choix des tailles -->
     <div class="col-1">
+      <!-- Choix des tailles -->
       <h2>Taille</h2>
       {% for taille in tailles %}
-      <div class="card taille-card {%if loop.index == 2%} selected-card {%endif%} my-4" data="{{taille}}">
+      <div class="card taille-card {%if loop.index == 2%} selected-card {%endif%} my-3" data="{{taille}}">
         <div class="card-body">
           <h5 class="card-title text-center">{{taille}}</h5>
         </div>
       </div>
       {% endfor %}
+      
+      <!-- Moitié/Moitié -->
+      <div class="card mt-4">
+        <div class="card-body">
+          <a href="{{ url_for('choose_pizza') }}">
+            <h5 class="card-title text-center">Moitié </h5>
+          </a>
+        </div>
+      </div>
+      
     </div> 
   </div>  
 

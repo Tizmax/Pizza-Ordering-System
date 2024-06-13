@@ -29,11 +29,11 @@
     <form method="POST" class="mt-4">
         <div class="form-group">
           <label for="name">Nom du client:</label>
-          <input type="text" id="name" name="name" class="form-control">
+          <input type="text" id="name" name="name" class="form-control" value="{{ name }}">
         </div>
         <div class="form-group">
           <label for="time">Heure:</label>
-          <input type="text" id="time" name="time" class="form-control" required>
+          <input type="text" id="time" name="time" class="form-control" required value="{{hour}}">
         </div>
         <div class="form-group">
           <label for="details">Infos supplémentaires:</label>
