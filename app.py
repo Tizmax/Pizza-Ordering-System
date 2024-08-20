@@ -371,7 +371,7 @@ def pricing(order):
 
 def save():
     json.dump(planning, open("planning.txt",'w'))
-    
+
 
 @app.route('/modif_order', methods=['POST'])
 def modif_order():
@@ -389,10 +389,10 @@ def modif_order():
         planning[time].pop(index)
     else:
         planning.pop(time)
-    
+
     save()
 
-    return jsonify({'status': 'success'}) 
+    return jsonify({'status': 'success'})
 
 @app.route('/dec_quantity', methods=['POST'])
 def dec_quantity():
@@ -404,15 +404,15 @@ def dec_quantity():
     order[index]["quantity"] -= 1
 
 
-    return jsonify({'status': 'success'}) 
+    return jsonify({'status': 'success'})
 
 @app.route('/inc_quantity', methods=['POST'])
 def inc_quantity():
     index = int(request.json)
 
     order[index]["quantity"] += 1
-    
-    return jsonify({'status': 'success'})    
+
+    return jsonify({'status': 'success'})
 
 @app.route('/update_taille', methods=['POST'])
 def update_taille():
@@ -420,7 +420,7 @@ def update_taille():
     data = request.json
 
     pizza["size"] = data
-    
+
     return jsonify({'status': 'success'})
 
 @app.route('/update_sauce', methods=['POST'])
@@ -432,7 +432,7 @@ def update_sauce():
         pizza["sauce"] = ""
     else:
         pizza["sauce"] = data
-    
+
     return jsonify({'status': 'success'})
 
 @app.route('/update_pizza', methods=['POST'])
@@ -444,7 +444,7 @@ def update_pizza():
     pizza["deplements"] = []
     pizza["sauce"] = ""
     pizza["size"] = "M"
-    
+
     return jsonify({'status': 'success'})
 
 @app.route('/add_supplement', methods=['POST'])
@@ -452,7 +452,7 @@ def add_supplement():
     global order
     data = request.json
     pizza["supplements"].append(data)
-    
+
     return jsonify({'status': 'success'})
 
 @app.route('/remove_supplement', methods=['POST'])
@@ -460,7 +460,7 @@ def remove_supplement():
     global pizza
     data = int(request.json)
     pizza["supplements"].pop(data)
-    
+
     return jsonify({'status': 'success'})
 
 @app.route('/remove_order', methods=['POST'])
@@ -473,7 +473,7 @@ def remove_order():
     else:
         planning.pop(time)
 
-    
+
     save()
 
     return jsonify({'status': 'success'})
@@ -483,7 +483,7 @@ def add_deplement():
     global order
     data = request.json
     pizza["deplements"].append(data)
-    
+
     return jsonify({'status': 'success'})
 
 
@@ -497,19 +497,19 @@ def reset_order():
     clientName = ""
     details = ""
     hour = ""
-    
+
     return jsonify({'status': 'success'})
 
 @app.route('/add_pizza_to_order', methods=['POST'])
 def add_pizza_to_order():
     global order
     order.append(pizza.copy())
-    
+
     return jsonify({'status': 'success'})
 
 @app.route('/')
 def index():
-    return redirect(url_for('planning'))
+    return redirect(url_for('order_display'))
 
 
 @app.route('/order_display')
@@ -537,11 +537,11 @@ def recap():
         try:
             if time_str in planning:
                 planning[time_str].append({"name": name, "pizzas": order.copy(), "price" : price})
-                
+
             else:
                 planning[time_str] = [{"name": name, "pizzas": order.copy(),"price" : price}]
-            
-            
+
+
             save()
             return redirect(url_for('order_display'))
         except ValueError:
@@ -556,5 +556,5 @@ def totals():
 
 if __name__ == "__main__":
     planning = json.load(open("planning.txt"))
-    app.run(host='0.0.0.0', port=5000, debug=True)
+    #app.run(host='0.0.0.0', port=5000, debug=True)
 
