@@ -1,0 +1,84 @@
+{% extends "layout.html" %}
+{% block header %}
+<meta http-equiv="refresh" content="10">
+{% endblock %}
+
+{% block content %}
+<h1>Planning</h1>
+<a href="/choose_pizza" onclick="resetOrder()" class="btn btn-primary mt-4">Nouvelle commande</a>
+<table class="table table-striped mt-4">
+  <thead>
+    <tr>
+      <th>N°</th>
+      <th>Taille</th>
+      <th>Pizza</th>
+      <th>Suppléments</th>
+      <th>Détails</th>
+      <th>Nom</th>
+      <th>Prix</th>
+      <th>État</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  {% for time, orders in planning.items() %}
+  <thead>
+    <tr>
+      <th colspan="7">{{time}}</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for order in orders %}
+    <tr>
+      <td>
+        {% for pizza in order.pizzas %}
+        <p>{{ pizza.quantity }}</p>
+        {% endfor %}
+      </td>
+      <td>
+        {% for pizza in order.pizzas %}
+        <p>{{ pizza.size }}</p>
+        {% endfor %}
+      </td>
+      <td>
+        {% for pizza in order.pizzas %}
+        <p>{{ pizza.name }} {{ pizza.sauce }}  </p>
+        {% endfor %}
+      </td>
+      <td>
+        {% for pizza in order.pizzas %}
+        <p>+
+          {% for supplement in pizza.supplements %}
+          {{supplement}}
+          {% endfor %}
+          -
+          {% for deplement in pizza.deplements %}
+          {{deplement}}
+          {% endfor %}
+        </p>
+        
+        {% endfor %}
+      </td>
+      <td></td>
+      <td>{{ order.name }}</td>
+      <td>{{ order.price}}</td>
+      <td>
+        <button>En attente</button>
+      </td>
+      <td>
+        <div class="delete">
+          <img  onclick="removeOrder('{{time}}', '{{loop.index0}}')" src="/static/images/delete.jpg" >
+        </div>
+      </td>
+      <td>
+        <div class="modif">
+          <a href="{{ url_for('recap') }}" onclick="modifOrder('{{time}}', '{{loop.index0}}')">modif</a>
+        </div>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+  {% endfor %}
+</table>
+<a href="/choose_pizza" onclick="resetOrder()" class="btn btn-primary mt-4">Nouvelle commande</a>
+{% endblock %}
