@@ -1,7 +1,22 @@
 from flask import Flask, render_template, request, redirect, url_for, jsonify, json
 from datetime import datetime
+import mysql.connector
 
 app = Flask(__name__)
+
+try:
+    con = mysql.connector.connect(
+        host="Tizmax.mysql.pythonanywhere-services.com",
+        username="Tizmax",
+        password="mysqlpassword",
+        database="Tizmax$default"
+        )
+    mycursor = con.cursor()
+    mycursor.execute("SELECT * FROM Pizzas")
+    results = mycursor.fetchall()
+except mysql.connector.Error as e:
+    print("shit")
+    print(e.message)
 
 tailles = ['P','M','G']
 
@@ -516,6 +531,10 @@ def index():
 def order_display():
     sorted_planning = dict(sorted(planning.items()))
     return render_template('order_display.html', planning=sorted_planning)
+
+@app.route('/testsql')
+def testsql():
+    return render_template('testsql.html', results=results)
 
 
 @app.route('/choose_pizza')

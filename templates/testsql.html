@@ -1,0 +1,16 @@
+{% extends "layout.html" %}
+{% block header %}
+{% endblock %}
+
+{% block content %}
+<h1>Table</h1>
+<table class="table table-striped mt-4">
+  <tbody>
+      {%for result in results%}
+
+      <tr>{{result}}</tr>
+
+      {%endfor%}
+  </tbody>
+</table>
+{% endblock %}
